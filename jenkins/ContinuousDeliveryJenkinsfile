@@ -28,9 +28,10 @@ pipeline {
                         parameters: [choice(choices: 'Yes\nNo', description: '', name: 'Pass')]
         
                     if (response == 'Yes') {
-                        env.RELEASE_APPROVED = true // Set an environment variable
+                        env.RELEASE_APPROVED = 'true' // Set an environment variable
                     } else {
                         echo "Build not approved. Skipping release."
+                        env.RELEASE_APPROVED = 'false'
                     }
                 }
             }
@@ -38,7 +39,7 @@ pipeline {
 
         stage('Release Package - Java-Project') {
             when {
-                expression { env.RELEASE_APPROVED == true } // Condition for the whole stage
+                expression { env.RELEASE_APPROVED == 'true' } // Condition for the whole stage
             }
             steps {
                 sh 'mvn package'
