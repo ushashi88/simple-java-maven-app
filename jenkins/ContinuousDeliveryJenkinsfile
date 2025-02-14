@@ -47,6 +47,9 @@ pipeline {
             }
         }
         stage('Deploy- Java-Project') {
+            when {
+                expression { env.RELEASE_APPROVED == 'true' } // Condition for the whole stage
+            }
             steps {
                 sh 'mvn install'
                 echo 'Operations team can deploy Java-Project'
