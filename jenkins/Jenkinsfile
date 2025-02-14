@@ -4,24 +4,31 @@ pipeline {
         skipStagesAfterUnstable()
     }
     stages {
-        stage('Build') {
+        stage("Clean - Java-Project") {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                sh 'mvn clean'
             }
         }
-        stage('Test') {
+        stage("Build - Java-Project") {
+            steps {
+                sh 'mvn compile'
+            }
+        }
+        stage("Test - Java-Project") {
             steps {
                 sh 'mvn test'
             }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
+        }
+        stage("Release Package - Java-Project") {
+            steps {
+                sh 'mvn package'
+                echo 'Java-Project is ready to release!'
             }
         }
-        stage('Deliver') {
+        stage('Deploy- Java-Project') {
             steps {
-                sh './jenkins/scripts/deliver.sh'
+                sh 'mvn install'
+                echo 'Operations team can deploy Java-Project'
             }
         }
     }
