@@ -22,12 +22,21 @@ pipeline {
             }
         }
         stage('User Acceptance Test - Java-Project') {
-            def response= input message: 'Is this build good to go?',
-            parameters: [choice(choices: 'Yes\nNo', description: '', name: 'Pass')]
-            if(response=="Yes") {
-                stage ("Release Package - Java-Project") {
-                'mvn package'
-                'echo Java-Project is ready to release!'
+            steps {
+                script {
+                    def response = input message: 'Is this build good to go?',
+                        parameters: [choice(choices: 'Yes\nNo', description: '', name: 'Pass')]
+        
+                    if (response == 'Yes') {
+                        stage("Release Package - Java-Project") {
+                            steps {
+                                sh 'mvn package'
+                                echo 'Java-Project is ready to release!'
+                            }
+                        }
+                    } else {
+                        echo "Build not approved. Skipping release."
+                    }
                 }
             }
         }
