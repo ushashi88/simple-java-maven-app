@@ -1,26 +1,27 @@
 pipeline {
     agent any
-    options {
-        skipStagesAfterUnstable()
-    }
     stages {
-        stage("Checkout Java-Project") {
+        stage("Clone Java-Project") {
             steps {
+                echo 'Cloning Java-Project '
                 git branch: 'master', url: 'https://github.com/nag9s/simple-java-maven-app.git'
             }
         }
         stage("Clean - Java-Project") {
             steps {
+                echo 'Cleoning Java-Project '
                 sh 'mvn clean'
             }
         }
         stage("Build - Java-Project") {
             steps {
+                echo 'Building Java-Project '
                 sh 'mvn compile'
             }
         }
         stage("Test - Java-Project") {
             steps {
+                echo 'Testing Java-Project '
                 sh 'mvn test'
             }
         }
