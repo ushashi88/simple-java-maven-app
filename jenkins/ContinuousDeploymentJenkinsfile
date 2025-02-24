@@ -1,32 +1,33 @@
 pipeline {
     agent any
     stages {
-        stage("Clone Java-Project") {
+        stage("Checkout Java-Project") {
             steps {
-                echo 'Cloning Java-Project '
+                echo "Checkout Java-Project"
                 git branch: 'master', url: 'https://github.com/nag9s/simple-java-maven-app.git'
             }
         }
         stage("Clean - Java-Project") {
             steps {
-                echo 'Cleoning Java-Project '
+                echo "Clean - Java-Project"
                 sh 'mvn clean'
             }
         }
         stage("Build - Java-Project") {
             steps {
-                echo 'Building Java-Project '
+                echo "Build - Java-Project"
                 sh 'mvn compile'
             }
         }
         stage("Test - Java-Project") {
             steps {
-                echo 'Testing Java-Project '
+                echo "Test - Java-Project"
                 sh 'mvn test'
             }
         }
         stage("Release Package - Java-Project") {
             steps {
+                echo "Release Package - Java-Project"
                 sh 'mvn package'
                 echo 'Java-Project is ready to release!'
             }
