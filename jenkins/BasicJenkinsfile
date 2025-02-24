@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+    stages {
+        stage("Checkout Java-Project") {
+            steps {
+                echo "Checkout Java-Project"
+            }    
+        }
+        stage("Clean - Java-Project") {
+            steps {
+                echo "Clean - Java-Project"
+            }
+        }
+        stage("Build - Java-Project") {
+            steps {
+                echo "Build - Java-Project"
+            }
+        }
+        stage("Test - Java-Project") {
+            steps {
+                echo "Test - Java-Project"
+            }
+        }
+        stage('User Acceptance Test - Java-Project') {
+            steps {
+                echo "User Acceptance Test - Java-Project"
+            }
+        }
+
+        stage('Release Package - Java-Project') {
+            steps {
+                echo "Release Package - Java-Project"
+            }
+        }
+        stage('Deploy- Java-Project') {
+            steps {
+                echo "Deploy- Java-Project"
+            }
+        }
+    }
+}
