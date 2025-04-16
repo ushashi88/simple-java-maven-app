@@ -1,4 +1,4 @@
-MIT License README 1
+MIT License
 
 Copyright (c) 2023 Jenkins Documentation
 
